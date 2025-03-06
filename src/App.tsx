@@ -1,4 +1,3 @@
-import React from 'react';
 import * as Tabs from '@radix-ui/react-tabs';
 import SpriteMapToSvg from './components/SpriteMapToSvg';
 import SvgToSpriteMap from './components/SvgToSpriteMap';
