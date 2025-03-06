@@ -1,0 +1,59 @@
+.app {
+  background-color: var(--color-bg);
+  color: var(--color-fg);
+  min-height: 100vh;
+  padding: 2rem;
+}
+
+.container {
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+.title {
+  font-size: 2.25rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+}
+
+.tabs {
+  margin-bottom: 2rem;
+}
+
+.tabs-list {
+  display: flex;
+  gap: 0.25rem;
+  border-radius: 0.5rem;
+  padding: 0.25rem;
+}
+
+.tab-trigger {
+  flex: 1;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.tab-trigger:hover {
+  color: var(--color-fg);
+  background-color: var(--color-bg-container-hover);
+}
+
+.tab-trigger:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--color-border);
+}
+
+.tab-trigger[data-state="active"] {
+  background-color: var(--color-action-primary);
+  color: var(--color-bg-container);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+
+
+.tab-panel {
+  outline: none;
+}
