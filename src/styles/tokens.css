@@ -18,24 +18,24 @@
   --color-bg: var(--grey-50);
   --color-bg-container: var(--grey-100);
   --color-bg-container-hover: var(--grey-150);
-  
+
   --color-border: var(--grey-200);
   --color-border-hover: var(--grey-300);
-  
+
   --color-fg: var(--grey-900);
   --color-fg-low-contrast: var(--grey-600);
-  --color-fg-high-contrast: var(--grey-600);
-  
+  --color-fg-high-contrast: var(--grey-200);
+
   --color-action-primary: var(--grey-800);
   --color-action-primary-hover: var(--grey-900);
   --color-action-danger: lch(53% 82 27);
   --color-action-danger-hover: lch(40% 83 27);
-  
+
   /* Component-specific tokens */
   --dropzone-border-color: var(--grey-300);
   --dropzone-border-color-active: var(--grey-600);
   --dropzone-background-active: var(--grey-100);
-} 
+}
 
 @media (prefers-color-scheme: dark) {
   :root {
@@ -43,21 +43,22 @@
     --color-bg: var(--grey-950);
     --color-bg-container: var(--grey-900);
     --color-bg-container-hover: var(--grey-800);
-    
+
     --color-border: var(--grey-800);
     --color-border-hover: var(--grey-700);
-    
+
     --color-fg: var(--grey-100);
     --color-fg-low-contrast: var(--grey-400);
-    
+    --color-fg-high-contrast: var(--grey-0);
+
     --color-action-primary: var(--grey-200);
     --color-action-primary-hover: var(--grey-100);
     --color-action-danger: lch(53% 82 27);
     --color-action-danger-hover: lch(40% 83 27);
-    
+
     /* Component-specific tokens */
     --dropzone-border-color: var(--grey-700);
     --dropzone-border-color-active: var(--grey-400);
     --dropzone-background-active: var(--grey-900);
-  } 
+  }
 }

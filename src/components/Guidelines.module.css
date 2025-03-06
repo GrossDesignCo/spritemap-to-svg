@@ -1,0 +1,67 @@
+.container {
+  max-width: 100%;
+  padding: 1rem;
+}
+
+.container h1,
+.container h2,
+.container h3 {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  color: var(--color-fg-high-contrast);
+}
+
+.container h1 {
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.container h2 {
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+.container h3 {
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
+.container p {
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+.container ul {
+  margin-bottom: 1rem;
+  padding-left: 1.5rem;
+}
+
+.container li {
+  margin-bottom: 0.5rem;
+  line-height: 1.6;
+}
+
+.container code {
+  background: var(--color-bg-container);
+  padding: 0.2rem 0.4rem;
+  border-radius: 0.25rem;
+  font-family: 'Geist Mono', monospace;
+  font-size: 0.9em;
+}
+
+.container pre {
+  background: var(--color-bg-container);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  margin: 1rem 0;
+  overflow-x: auto;
+}
+
+.container pre code {
+  background: none;
+  padding: 0;
+  border-radius: 0;
+  font-family: 'Geist Mono', monospace;
+  font-size: 0.9em;
+  color: var(--color-fg);
+} 

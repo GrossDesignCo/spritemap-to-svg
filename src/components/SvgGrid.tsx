@@ -13,10 +13,10 @@ interface SvgGridProps {
   showRemoveButton?: boolean;
 }
 
-const SvgGrid: React.FC<SvgGridProps> = ({ 
-  items, 
-  onRemove, 
-  showRemoveButton = false 
+const SvgGrid: React.FC<SvgGridProps> = ({
+  items,
+  onRemove,
+  showRemoveButton = false,
 }) => {
   return (
     <div className={styles.grid}>
@@ -43,4 +43,4 @@ const SvgGrid: React.FC<SvgGridProps> = ({
   );
 };
 
-export default SvgGrid; 
+export default SvgGrid;

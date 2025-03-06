@@ -3,7 +3,12 @@ import { saveAs } from 'file-saver';
 import styles from './SvgToSpriteMap.module.css';
 import DropZone from './DropZone';
 import SvgGrid, { SvgItem } from './SvgGrid';
+import SvgToSpriteMapDocs from './SvgToSpriteMapDocs';
 
+/**
+ * Component that displays documentation for converting SVG files to a spritemap
+ * using statically imported markdown content.
+ */
 const SvgToSpriteMap: React.FC = () => {
   const [svgs, setSvgs] = useState<SvgItem[]>([]);
 
@@ -22,11 +27,11 @@ const SvgToSpriteMap: React.FC = () => {
           const content = svgElement.innerHTML;
           const fileName = file.name.replace('.svg', '');
           const id = fileName.replace(/[^a-z0-9-]/gi, '-').toLowerCase();
-          
+
           newSvgs.push({
             id,
             name: fileName,
-            content: `<svg viewBox="${viewBox}" xmlns="http://www.w3.org/2000/svg">${content}</svg>`
+            content: `<svg viewBox="${viewBox}" xmlns="http://www.w3.org/2000/svg">${content}</svg>`,
           });
         }
       }
@@ -41,12 +46,14 @@ const SvgToSpriteMap: React.FC = () => {
 
   const generateSpriteMap = () => {
     const spriteMap = `<?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">${svgs.map(({ id, content, name }) => {
-  const viewBox = content.match(/viewBox="([^"]+)"/)?.[1] || '';
-  return `  <symbol id="${id}" viewBox="${viewBox}">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">${svgs
+      .map(({ id, content }) => {
+        const viewBox = content.match(/viewBox="([^"]+)"/)?.[1] || '';
+        return `  <symbol id="${id}" viewBox="${viewBox}">
     ${content.replace(/<svg[^>]*>/, '').replace(/<\/svg>/, '')}
   </symbol>`;
-}).join('\n')}</svg>`;
+      })
+      .join('\n')}</svg>`;
 
     const blob = new Blob([spriteMap], { type: 'image/svg+xml' });
     saveAs(blob, 'spritemap.svg');
@@ -55,25 +62,10 @@ const SvgToSpriteMap: React.FC = () => {
   return (
     <div className={styles.container}>
       <section className={styles.header}>
-        <h1 className={styles.title}>SVG Spritemap Converter</h1>
-        <div className={styles.description}>
-          <p>
-            Convert between individual SVG files and SVG spritemaps. Upload your SVG files to combine them into a single spritemap, 
-            making it efficient to use multiple icons in your web projects with a single HTTP request.
-          </p>
-          <p>
-            Each SVG will be converted into a <code>&lt;symbol&gt;</code> element with a unique ID, which you can later reference 
-            using <code>&lt;use&gt;</code> tags in your HTML.
-          </p>
-          <p>* This tool runs exclusively in your browser. No data is sent to any servers.</p>
-        </div>
+        <SvgToSpriteMapDocs />
       </section>
 
-      <DropZone
-        onFilesDropped={handleFileUpload}
-        accept=".svg"
-        multiple={true}
-      >
+      <DropZone onFilesDropped={handleFileUpload} accept=".svg" multiple={true}>
         <p className={styles.dropZoneText}>
           Drop your SVG files here or click to upload
         </p>
@@ -93,15 +85,11 @@ const SvgToSpriteMap: React.FC = () => {
             </button>
           </div>
 
-          <SvgGrid 
-            items={svgs} 
-            onRemove={removeSvg}
-            showRemoveButton={true}
-          />
+          <SvgGrid items={svgs} onRemove={removeSvg} showRemoveButton={true} />
         </div>
       )}
     </div>
   );
 };
 
-export default SvgToSpriteMap; 
+export default SvgToSpriteMap;

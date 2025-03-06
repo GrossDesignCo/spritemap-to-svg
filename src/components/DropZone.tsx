@@ -33,7 +33,9 @@ const DropZone: React.FC<DropZoneProps> = ({
 
   return (
     <div
-      className={`${styles.dropZone} ${isDragging ? styles.dragging : ''} ${className || ''}`}
+      className={`${styles.dropZone} ${isDragging ? styles.dragging : ''} ${
+        className || ''
+      }`}
       onDragOver={(e) => {
         e.preventDefault();
         setIsDragging(true);
@@ -52,11 +54,13 @@ const DropZone: React.FC<DropZoneProps> = ({
       />
       {children || (
         <p className={styles.dropZoneText}>
-          {isDragging ? 'Drop files here' : 'Drop files here or click to upload'}
+          {isDragging
+            ? 'Drop files here'
+            : 'Drop files here or click to upload'}
         </p>
       )}
     </div>
   );
 };
 
-export default DropZone; 
+export default DropZone;

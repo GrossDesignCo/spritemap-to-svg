@@ -1,34 +1,90 @@
-import React, { useEffect, useState } from 'react';
-import MarkdownRenderer from './MarkdownRenderer';
-import { loadMarkdownContent } from '../utils/markdown';
+import React from 'react';
+import styles from './Guidelines.module.css';
 
 /**
  * Guidelines component that displays SVG spritemap usage guidelines
- * using markdown content for better maintainability.
  */
 const Guidelines: React.FC = () => {
-  const [content, setContent] = useState('');
-  const [error, setError] = useState<string | null>(null);
+  return (
+    <div className={styles.container}>
+      <h1>What is an SVG Spritemap?</h1>
+      
+      <p>
+        An SVG spritemap is a single SVG file that contains multiple SVG symbols,
+        each with a unique ID. This approach allows you to:
+      </p>
 
-  useEffect(() => {
-    loadMarkdownContent('/src/content/guidelines.md')
-      .then(setContent)
-      .catch(err => {
-        console.error('Failed to load guidelines:', err);
-        setError('Failed to load guidelines. Please try again later.');
-      });
-  }, []);
+      <ul>
+        <li>Reduce HTTP requests by combining multiple SVG files into one</li>
+        <li>Reuse the same icons multiple times without code duplication</li>
+        <li>Easily manage and maintain your SVG assets in one place</li>
+      </ul>
 
-  if (error) {
-    return (
-      <div>
-        <p>Error</p>
-        <p>{error}</p>
-      </div>
-    );
-  }
+      <h2>How to Use a Spritemap</h2>
 
-  return <MarkdownRenderer content={content} />;
+      <h3>1. Include the Spritemap</h3>
+
+      <p>
+        First, include the spritemap in your HTML. You can either inline it or load
+        it externally:
+      </p>
+
+      <pre>
+        <code className="language-html">
+          {`<!-- Option 1: Inline -->
+<div style="display: none">
+  <!-- Paste your spritemap here -->
+</div>
+
+<!-- Option 2: External file -->
+<object id="svg-sprites" type="image/svg+xml" data="spritemap.svg">
+  Your browser does not support SVG
+</object>`}
+        </code>
+      </pre>
+
+      <h3>2. Use the Symbols</h3>
+
+      <p>Reference symbols using the SVG <code>{'<use>'}</code> element:</p>
+
+      <pre>
+        <code className="language-html">
+          {`<svg>
+  <use href="#icon-id" />
+</svg>`}
+        </code>
+      </pre>
+
+      <h2>Best Practices</h2>
+
+      <ul>
+        <li>Use meaningful and consistent IDs for your symbols</li>
+        <li>Optimize your SVGs before adding them to the spritemap</li>
+        <li>Keep the viewBox attribute on your symbols for proper scaling</li>
+        <li>Consider using tools like SVGO to optimize your SVGs</li>
+        <li>Remove unnecessary attributes and inline styles from your SVGs</li>
+      </ul>
+
+      <h2>Example Usage</h2>
+
+      <pre>
+        <code className="language-html">
+          {`<!-- HTML -->
+<svg class="icon" aria-hidden="true">
+  <use href="#icon-menu" />
+</svg>
+
+<!-- CSS -->
+.icon { width: 24px; height: 24px; fill: currentColor; }`}
+        </code>
+      </pre>
+
+      <p>
+        The <code>currentColor</code> value allows the icon to inherit its color
+        from its parent element, making it easy to change the icon color using CSS.
+      </p>
+    </div>
+  );
 };
 
-export default Guidelines; 
+export default Guidelines;

@@ -1,8 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;700&family=Geist+Sans:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Geist+Mono:wght@300;400;700&display=swap');
 @import './styles/tokens.css';
 
 :root {
   font-family: 'Geist Mono';
+  font-weight: 300;
 }
 
 * {
@@ -14,6 +15,7 @@ body {
 }
 
 button {
+  font: inherit;
   appearance: none;
   border: none;
   background: var(--color-fg-low-contrast);
@@ -28,4 +30,11 @@ button:hover {
   color: var(--color-bg);
 }
 
-
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--color-fg-high-contrast);
+}

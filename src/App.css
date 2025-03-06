@@ -1,19 +1,16 @@
 .app {
   background-color: var(--color-bg);
   color: var(--color-fg);
-  min-height: 100vh;
   padding: 2rem;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .container {
   max-width: 72rem;
   margin: 0 auto;
-}
-
-.title {
-  font-size: 2.25rem;
-  font-weight: bold;
-  margin-bottom: 2rem;
+  flex-grow: 1;
 }
 
 .tabs {
@@ -46,14 +43,8 @@
   box-shadow: 0 0 0 2px var(--color-border);
 }
 
-.tab-trigger[data-state="active"] {
+.tab-trigger[data-state='active'] {
   background-color: var(--color-action-primary);
   color: var(--color-bg-container);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-}
-
-
-
-.tab-panel {
-  outline: none;
 }
