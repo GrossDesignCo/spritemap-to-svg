@@ -20,14 +20,12 @@ const TABS = {
   }
 } as const;
 
-type TabKey = keyof typeof TABS;
-
 function App() {
   return (
     <div className="app">
       <div className="container">
         <h1 className="title">
-          SVG Spritemap Tool
+          SVG Spritemap to SVG Files
         </h1>
         
         <Tabs.Root defaultValue="spritemap-to-svg" className="tabs">

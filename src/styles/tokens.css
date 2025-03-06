@@ -1,32 +1,35 @@
 :root {
   /* Base Scale - Greys */
-  --grey-50: #fafafa;
-  --grey-100: #f5f5f5;
-  --grey-200: #eeeeee;
-  --grey-300: #e0e0e0;
-  --grey-400: #bdbdbd;
-  --grey-500: #9e9e9e;
-  --grey-600: #757575;
-  --grey-700: #616161;
-  --grey-800: #424242;
-  --grey-900: #212121;
-  --grey-950: #111;
+  --grey-0: lch(100% 0 0);
+  --grey-50: lch(98% 0 0);
+  --grey-100: lch(96% 0 0);
+  --grey-200: lch(93% 0 0);
+  --grey-300: lch(88% 0 0);
+  --grey-400: lch(75% 0 0);
+  --grey-500: lch(63% 0 0);
+  --grey-600: lch(48% 0 0);
+  --grey-700: lch(41% 0 0);
+  --grey-800: lch(28% 0 0);
+  --grey-900: lch(15% 0 0);
+  --grey-950: lch(8% 0 0);
+  --grey-1000: lch(0% 0 0);
 
   /* Semantic Tokens */
   --color-bg: var(--grey-50);
-  --color-bg-container: white;
-  --color-bg-container-hover: var(--grey-100);
+  --color-bg-container: var(--grey-100);
+  --color-bg-container-hover: var(--grey-150);
   
   --color-border: var(--grey-200);
   --color-border-hover: var(--grey-300);
   
   --color-fg: var(--grey-900);
   --color-fg-low-contrast: var(--grey-600);
+  --color-fg-high-contrast: var(--grey-600);
   
   --color-action-primary: var(--grey-800);
   --color-action-primary-hover: var(--grey-900);
-  --color-action-danger: #ff4444;
-  --color-action-danger-hover: #cc0000;
+  --color-action-danger: lch(53% 82 27);
+  --color-action-danger-hover: lch(40% 83 27);
   
   /* Component-specific tokens */
   --dropzone-border-color: var(--grey-300);
@@ -38,8 +41,8 @@
   :root {
     /* Semantic Tokens */
     --color-bg: var(--grey-950);
-    --color-bg-container: black;
-    --color-bg-container-hover: var(--grey-900);
+    --color-bg-container: var(--grey-900);
+    --color-bg-container-hover: var(--grey-800);
     
     --color-border: var(--grey-800);
     --color-border-hover: var(--grey-700);
@@ -49,8 +52,8 @@
     
     --color-action-primary: var(--grey-200);
     --color-action-primary-hover: var(--grey-100);
-    --color-action-danger: #ff4444;
-    --color-action-danger-hover: #cc0000;
+    --color-action-danger: lch(53% 82 27);
+    --color-action-danger-hover: lch(40% 83 27);
     
     /* Component-specific tokens */
     --dropzone-border-color: var(--grey-700);

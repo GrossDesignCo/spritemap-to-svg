@@ -20,20 +20,11 @@
   font-size: 13px;
 }
 
-.dropZone {
-  border: 2px dashed var(--color-border);
-  border-radius: 8px;
-  padding: 32px;
-  text-align: center;
-  cursor: pointer;
-  transition: all 0.2s ease;
+.dropZoneText {
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-size: 14px;
 }
-
-.dropZone.dragging {
-  border-color: var(--color-border-hover);
-  background: rgba(0, 102, 204, 0.05);
-}
-
 
 .results {
   display: flex;

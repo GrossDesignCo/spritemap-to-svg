@@ -1,21 +1,14 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { saveAs } from 'file-saver';
 import styles from './SvgToSpriteMap.module.css';
-
-interface UploadedSvg {
-  id: string;
-  content: string;
-  viewBox: string;
-  originalName: string;
-}
+import DropZone from './DropZone';
+import SvgGrid, { SvgItem } from './SvgGrid';
 
 const SvgToSpriteMap: React.FC = () => {
-  const [svgs, setSvgs] = useState<UploadedSvg[]>([]);
-  const [isDragging, setIsDragging] = useState(false);
-  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [svgs, setSvgs] = useState<SvgItem[]>([]);
 
   const handleFileUpload = async (files: FileList) => {
-    const newSvgs: UploadedSvg[] = [];
+    const newSvgs: SvgItem[] = [];
 
     for (const file of Array.from(files)) {
       if (file.type === 'image/svg+xml') {
@@ -28,12 +21,12 @@ const SvgToSpriteMap: React.FC = () => {
           const viewBox = svgElement.getAttribute('viewBox') || '';
           const content = svgElement.innerHTML;
           const fileName = file.name.replace('.svg', '');
+          const id = fileName.replace(/[^a-z0-9-]/gi, '-').toLowerCase();
           
           newSvgs.push({
-            id: fileName.replace(/[^a-z0-9-]/gi, '-').toLowerCase(),
-            content,
-            viewBox,
-            originalName: fileName
+            id,
+            name: fileName,
+            content: `<svg viewBox="${viewBox}" xmlns="http://www.w3.org/2000/svg">${content}</svg>`
           });
         }
       }
@@ -42,25 +35,18 @@ const SvgToSpriteMap: React.FC = () => {
     setSvgs((prev) => [...prev, ...newSvgs]);
   };
 
-  const handleDrop = (e: React.DragEvent) => {
-    e.preventDefault();
-    setIsDragging(false);
-    handleFileUpload(e.dataTransfer.files);
-  };
-
   const removeSvg = (id: string) => {
     setSvgs((prev) => prev.filter((svg) => svg.id !== id));
   };
 
   const generateSpriteMap = () => {
     const spriteMap = `<?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-${svgs.map(({ id, content, viewBox }) => 
-  `  <symbol id="${id}" viewBox="${viewBox}">
-    ${content}
-  </symbol>`
-).join('\n')}
-</svg>`;
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">${svgs.map(({ id, content, name }) => {
+  const viewBox = content.match(/viewBox="([^"]+)"/)?.[1] || '';
+  return `  <symbol id="${id}" viewBox="${viewBox}">
+    ${content.replace(/<svg[^>]*>/, '').replace(/<\/svg>/, '')}
+  </symbol>`;
+}).join('\n')}</svg>`;
 
     const blob = new Blob([spriteMap], { type: 'image/svg+xml' });
     saveAs(blob, 'spritemap.svg');
@@ -79,33 +65,19 @@ ${svgs.map(({ id, content, viewBox }) =>
             Each SVG will be converted into a <code>&lt;symbol&gt;</code> element with a unique ID, which you can later reference 
             using <code>&lt;use&gt;</code> tags in your HTML.
           </p>
+          <p>* This tool runs exclusively in your browser. No data is sent to any servers.</p>
         </div>
       </section>
 
-      <div
-        className={`${styles.dropZone} ${isDragging ? styles.dragging : ''}`}
-        onDragOver={(e) => {
-          e.preventDefault();
-          setIsDragging(true);
-        }}
-        onDragLeave={() => setIsDragging(false)}
-        onDrop={handleDrop}
-        onClick={() => fileInputRef.current?.click()}
+      <DropZone
+        onFilesDropped={handleFileUpload}
+        accept=".svg"
+        multiple={true}
       >
-        <input
-          type="file"
-          ref={fileInputRef}
-          style={{ display: 'none' }}
-          accept=".svg"
-          multiple
-          onChange={(e) => {
-            if (e.target.files) handleFileUpload(e.target.files);
-          }}
-        />
         <p className={styles.dropZoneText}>
-          {isDragging ? 'Drop SVGs here' : 'Drop your SVG files here or click to upload'}
+          Drop your SVG files here or click to upload
         </p>
-      </div>
+      </DropZone>
 
       {svgs.length > 0 && (
         <div className={styles.results}>
@@ -121,27 +93,11 @@ ${svgs.map(({ id, content, viewBox }) =>
             </button>
           </div>
 
-          <div className={styles.grid}>
-            {svgs.map(({ id, content, viewBox, originalName }) => (
-              <div key={id} className={styles.svgCard}>
-                <button
-                  onClick={() => removeSvg(id)}
-                  className={styles.removeButton}
-                >
-                  ×
-                </button>
-                <div
-                  className={styles.svgPreview}
-                  dangerouslySetInnerHTML={{ 
-                    __html: `<svg viewBox="${viewBox}" xmlns="http://www.w3.org/2000/svg">${content}</svg>` 
-                  }}
-                />
-                <p className={styles.svgName} title={originalName}>
-                  {originalName}
-                </p>
-              </div>
-            ))}
-          </div>
+          <SvgGrid 
+            items={svgs} 
+            onRemove={removeSvg}
+            showRemoveButton={true}
+          />
         </div>
       )}
     </div>
