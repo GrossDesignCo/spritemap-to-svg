@@ -19,18 +19,19 @@ const SpriteMapToSvg: React.FC = () => {
 
       const newSymbols: SvgItem[] = Array.from(symbolElements).map((symbol) => {
         const id = symbol.getAttribute('id') || '';
-        const viewBox = symbol.getAttribute('viewBox') || '';
         const content = symbol.innerHTML;
 
         // Get all attributes except 'id' since we'll handle that separately
         const attributes = Array.from(symbol.attributes)
-          .filter(attr => attr.name !== 'id')
-          .map(attr => `${attr.name}="${attr.value}"`)
+          .filter((attr) => attr.name !== 'id')
+          .map((attr) => `${attr.name}="${attr.value}"`)
           .join(' ');
 
         // Ensure we have xmlns attribute for standalone SVG
         const xmlns = 'xmlns="http://www.w3.org/2000/svg"';
-        const allAttributes = attributes.includes('xmlns=') ? attributes : `${xmlns} ${attributes}`;
+        const allAttributes = attributes.includes('xmlns=')
+          ? attributes
+          : `${xmlns} ${attributes}`;
 
         return {
           id,
@@ -76,10 +77,7 @@ const SpriteMapToSvg: React.FC = () => {
             <h2 className={styles.resultsTitle}>
               Extracted SVGs ({symbols.length})
             </h2>
-            <button
-              onClick={downloadAllSvgs}
-              className={styles.downloadButton}
-            >
+            <button onClick={downloadAllSvgs} className={styles.downloadButton}>
               Download All SVGs
             </button>
           </div>

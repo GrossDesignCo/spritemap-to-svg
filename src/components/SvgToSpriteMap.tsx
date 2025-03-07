@@ -23,14 +23,13 @@ const SvgToSpriteMap: React.FC = () => {
         const svgElement = doc.querySelector('svg');
 
         if (svgElement) {
-          const viewBox = svgElement.getAttribute('viewBox') || '';
           const content = svgElement.innerHTML;
           const fileName = file.name.replace('.svg', '');
           const id = fileName.replace(/[^a-z0-9-]/gi, '-').toLowerCase();
 
           // Get all attributes from the original SVG
           const attributes = Array.from(svgElement.attributes)
-            .map(attr => `${attr.name}="${attr.value}"`)
+            .map((attr) => `${attr.name}="${attr.value}"`)
             .join(' ');
 
           newSvgs.push({
@@ -57,13 +56,13 @@ const SvgToSpriteMap: React.FC = () => {
         const parser = new DOMParser();
         const doc = parser.parseFromString(content, 'image/svg+xml');
         const svgElement = doc.querySelector('svg');
-        
+
         if (!svgElement) return '';
 
         // Get all attributes except xmlns (since it's on the root svg)
         const attributes = Array.from(svgElement.attributes)
-          .filter(attr => !attr.name.startsWith('xmlns'))
-          .map(attr => `${attr.name}="${attr.value}"`)
+          .filter((attr) => !attr.name.startsWith('xmlns'))
+          .map((attr) => `${attr.name}="${attr.value}"`)
           .join(' ');
 
         // Get the inner content without the svg wrapper
