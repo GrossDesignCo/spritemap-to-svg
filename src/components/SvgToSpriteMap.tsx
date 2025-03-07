@@ -28,10 +28,15 @@ const SvgToSpriteMap: React.FC = () => {
           const fileName = file.name.replace('.svg', '');
           const id = fileName.replace(/[^a-z0-9-]/gi, '-').toLowerCase();
 
+          // Get all attributes from the original SVG
+          const attributes = Array.from(svgElement.attributes)
+            .map(attr => `${attr.name}="${attr.value}"`)
+            .join(' ');
+
           newSvgs.push({
             id,
             name: fileName,
-            content: `<svg viewBox="${viewBox}" xmlns="http://www.w3.org/2000/svg">${content}</svg>`,
+            content: `<svg ${attributes}>${content}</svg>`,
           });
         }
       }
@@ -48,9 +53,24 @@ const SvgToSpriteMap: React.FC = () => {
     const spriteMap = `<?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">${svgs
       .map(({ id, content }) => {
-        const viewBox = content.match(/viewBox="([^"]+)"/)?.[1] || '';
-        return `  <symbol id="${id}" viewBox="${viewBox}">
-    ${content.replace(/<svg[^>]*>/, '').replace(/<\/svg>/, '')}
+        // Parse the SVG to extract all attributes
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(content, 'image/svg+xml');
+        const svgElement = doc.querySelector('svg');
+        
+        if (!svgElement) return '';
+
+        // Get all attributes except xmlns (since it's on the root svg)
+        const attributes = Array.from(svgElement.attributes)
+          .filter(attr => !attr.name.startsWith('xmlns'))
+          .map(attr => `${attr.name}="${attr.value}"`)
+          .join(' ');
+
+        // Get the inner content without the svg wrapper
+        const innerContent = svgElement.innerHTML;
+
+        return `  <symbol id="${id}" ${attributes}>
+    ${innerContent}
   </symbol>`;
       })
       .join('\n')}</svg>`;

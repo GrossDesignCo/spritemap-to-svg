@@ -22,10 +22,20 @@ const SpriteMapToSvg: React.FC = () => {
         const viewBox = symbol.getAttribute('viewBox') || '';
         const content = symbol.innerHTML;
 
+        // Get all attributes except 'id' since we'll handle that separately
+        const attributes = Array.from(symbol.attributes)
+          .filter(attr => attr.name !== 'id')
+          .map(attr => `${attr.name}="${attr.value}"`)
+          .join(' ');
+
+        // Ensure we have xmlns attribute for standalone SVG
+        const xmlns = 'xmlns="http://www.w3.org/2000/svg"';
+        const allAttributes = attributes.includes('xmlns=') ? attributes : `${xmlns} ${attributes}`;
+
         return {
           id,
           name: id,
-          content: `<svg viewBox="${viewBox}" xmlns="http://www.w3.org/2000/svg">${content}</svg>`,
+          content: `<svg ${allAttributes}>${content}</svg>`,
         };
       });
 
@@ -74,7 +84,7 @@ const SpriteMapToSvg: React.FC = () => {
             </button>
           </div>
 
-          <SvgGrid items={symbols} showRemoveButton={false} />
+          <SvgGrid items={symbols} />
         </div>
       )}
     </div>
