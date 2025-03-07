@@ -1,26 +1,3 @@
 .container {
-  max-width: 100%;
   padding: 1rem;
 }
-
-.container h1 {
-  font-size: 1.75rem;
-  font-weight: 600;
-  color: var(--color-fg-high-contrast);
-  margin-bottom: 1rem;
-}
-
-.container p {
-  margin-bottom: 1rem;
-  line-height: 1.6;
-  color: var(--color-fg);
-}
-
-.container code {
-  background: var(--color-bg-container);
-  padding: 0.2rem 0.4rem;
-  border-radius: 0.25rem;
-  font-family: 'Geist Mono', monospace;
-  font-size: 0.9em;
-  color: var(--color-fg-high-contrast);
-} 

@@ -1,13 +1,12 @@
 import React from 'react';
-import styles from './Guidelines.module.css';
 
 /**
  * Guidelines component that displays SVG spritemap usage guidelines
  */
 const Guidelines: React.FC = () => {
   return (
-    <div className={styles.container}>
-      <h1>What is an SVG Spritemap?</h1>
+    <div>
+      <h2>What is an SVG Spritemap?</h2>
       
       <p>
         An SVG spritemap is a single SVG file that contains multiple SVG symbols,

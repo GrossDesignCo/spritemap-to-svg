@@ -15,7 +15,7 @@ const TABS = {
     component: SvgToSpriteMap,
   },
   guidelines: {
-    label: 'Guidelines',
+    label: 'How-To',
     component: Guidelines,
   },
 } as const;

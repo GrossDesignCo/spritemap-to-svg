@@ -38,3 +38,15 @@ h5,
 h6 {
   color: var(--color-fg-high-contrast);
 }
+
+code {
+  background: var(--color-bg-container);
+}
+
+pre {
+  background: var(--color-bg-container);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  max-width: calc(100% - 3rem);
+  overflow-x: auto;
+}

@@ -1,4 +1,5 @@
 import React from 'react';
+import { saveAs } from 'file-saver';
 import styles from './SvgGrid.module.css';
 
 export interface SvgItem {
@@ -15,21 +16,25 @@ interface SvgGridProps {
 
 const SvgGrid: React.FC<SvgGridProps> = ({
   items,
-  onRemove,
-  showRemoveButton = false,
 }) => {
+  const handleDownload = (content: string, name: string) => {
+    const blob = new Blob([content], { type: 'image/svg+xml' });
+    saveAs(blob, `${name}.svg`);
+  };
+
   return (
     <div className={styles.grid}>
       {items.map(({ id, content, name }) => (
-        <div key={id} className={styles.svgCard}>
-          {showRemoveButton && onRemove && (
-            <button
-              onClick={() => onRemove(id)}
-              className={styles.removeButton}
-            >
-              ×
-            </button>
-          )}
+        <div key={id} className={styles.svgCard}
+          onClick={() => handleDownload(content, name)}
+          role="button"
+          title="Click to download"
+          tabIndex={0}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              handleDownload(content, name);
+            }
+          }}>
           <div
             className={styles.svgPreview}
             dangerouslySetInnerHTML={{ __html: content }}
