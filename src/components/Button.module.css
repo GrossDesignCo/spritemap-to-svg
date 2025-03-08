@@ -1,0 +1,37 @@
+.button {
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+/* Icon-onl variant */
+.button:has(> svg:only-child) {
+  padding: 8px;
+}
+
+.primary {
+  background: var(--color-action-primary);
+  color: var(--color-bg);
+}
+
+.primary:hover {
+  background: var(--color-action-primary-hover);
+}
+
+.secondary {
+  background: var(--color-bg-container);
+  color: var(--color-fg);
+  border: 1px solid var(--color-border);
+}
+
+.secondary:hover {
+  background: var(--color-bg-container-hover);
+  color: var(--color-fg-high-contrast);
+  border-color: var(--color-border-high-contrast);
+} 

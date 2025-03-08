@@ -8,11 +8,11 @@
 }
 
 .dropZone:hover {
-  border-color: var(--color-border-hover);
+  border-color: var(--color-border-high-contrast);
 }
 
 .dragging {
-  border-color: var(--color-border-hover);
+  border-color: var(--color-border-high-contrast);
   background-color: var(--color-bg-container);
 }
 

@@ -5,6 +5,7 @@ import styles from './SpriteMapToSvg.module.css';
 import DropZone from './DropZone';
 import SvgGrid, { SvgItem } from './SvgGrid';
 import SpriteMapToSvgDocs from './SpriteMapToSvgDocs';
+import Button from './Button';
 
 const SpriteMapToSvg: React.FC = () => {
   const [symbols, setSymbols] = useState<SvgItem[]>([]);
@@ -77,9 +78,9 @@ const SpriteMapToSvg: React.FC = () => {
             <h2 className={styles.resultsTitle}>
               Extracted SVGs ({symbols.length})
             </h2>
-            <button onClick={downloadAllSvgs} className={styles.downloadButton}>
+            <Button onClick={downloadAllSvgs}>
               Download All SVGs
-            </button>
+            </Button>
           </div>
 
           <SvgGrid items={symbols} />

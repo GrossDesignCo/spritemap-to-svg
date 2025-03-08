@@ -4,6 +4,7 @@ import styles from './SvgToSpriteMap.module.css';
 import DropZone from './DropZone';
 import SvgGrid, { SvgItem } from './SvgGrid';
 import SvgToSpriteMapDocs from './SvgToSpriteMapDocs';
+import Button from './Button';
 
 /**
  * Component that displays documentation for converting SVG files to a spritemap
@@ -96,12 +97,9 @@ const SvgToSpriteMap: React.FC = () => {
             <h2 className={styles.resultsTitle}>
               Uploaded SVGs ({svgs.length})
             </h2>
-            <button
-              onClick={generateSpriteMap}
-              className={styles.generateButton}
-            >
+            <Button onClick={generateSpriteMap}>
               Generate Spritemap
-            </button>
+            </Button>
           </div>
 
           <SvgGrid items={svgs} onRemove={removeSvg} showRemoveButton={true} />

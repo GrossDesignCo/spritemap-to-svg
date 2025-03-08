@@ -34,8 +34,8 @@
 }
 
 .tab-trigger:hover {
-  color: var(--color-fg);
-  background-color: var(--color-bg-container-hover);
+  color: var(--color-bg);
+  background-color: var(--color-fg-high-contrast);
 }
 
 .tab-trigger:focus {

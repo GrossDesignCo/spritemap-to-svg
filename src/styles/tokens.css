@@ -16,18 +16,19 @@
 
   /* Semantic Tokens */
   --color-bg: var(--grey-50);
-  --color-bg-container: var(--grey-100);
-  --color-bg-container-hover: var(--grey-150);
+  --color-bg-container: var(--grey-200);
+  --color-bg-container-hover: var(--grey-300);
 
-  --color-border: var(--grey-200);
-  --color-border-hover: var(--grey-300);
+  --color-border: var(--grey-400);
+  --color-border-low-contrast: var(--grey-300);
+  --color-border-high-contrast: var(--grey-700);
 
   --color-fg: var(--grey-900);
   --color-fg-low-contrast: var(--grey-600);
-  --color-fg-high-contrast: var(--grey-200);
+  --color-fg-high-contrast: var(--grey-1000);
 
   --color-action-primary: var(--grey-800);
-  --color-action-primary-hover: var(--grey-900);
+  --color-action-primary-hover: var(--grey-1000);
   --color-action-danger: lch(53% 82 27);
   --color-action-danger-hover: lch(40% 83 27);
 
@@ -44,15 +45,16 @@
     --color-bg-container: var(--grey-900);
     --color-bg-container-hover: var(--grey-800);
 
-    --color-border: var(--grey-800);
-    --color-border-hover: var(--grey-700);
+    --color-border: var(--grey-600);
+    --color-border-low-contrast: var(--grey-700);
+    --color-border-high-contrast: var(--grey-300);
 
     --color-fg: var(--grey-100);
     --color-fg-low-contrast: var(--grey-400);
     --color-fg-high-contrast: var(--grey-0);
 
     --color-action-primary: var(--grey-200);
-    --color-action-primary-hover: var(--grey-100);
+    --color-action-primary-hover: var(--grey-0);
     --color-action-danger: lch(53% 82 27);
     --color-action-danger-hover: lch(40% 83 27);
 
